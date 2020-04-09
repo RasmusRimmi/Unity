@@ -15,6 +15,8 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        // Spawn obstacles every 2 seconds
         InvokeRepeating("SpawnObstacle", startDelay, repeatTime);
     }
 
@@ -26,6 +28,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnObstacle()
     {
+        // Spawn obstacles until player hit obstacle
         if (playerControllerScript.gameOver == false)
         {
             Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);

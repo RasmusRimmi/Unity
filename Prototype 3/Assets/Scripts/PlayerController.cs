@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Jump and make sound after pressing spacebar
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -40,11 +41,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Continue game when hit the ground, show dirt
         if (collision.gameObject.CompareTag("Ground") && !gameOver)
         {
             isOnGround = true;
             dirtParticle.Play();
         }
+
+        // Show explosion and play the crash sound when hit obstacle, show death animation, don't show dirt anymore
         else if (collision.gameObject.CompareTag("Obstacle") && !gameOver)
         {
             gameOver = true;
